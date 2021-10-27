@@ -12,6 +12,7 @@ from PyQt5.QtWidgets import QToolButton
 from PyQt5.QtWidgets import QVBoxLayout
 from PyQt5.QtWidgets import QWidget
 
+
 class MainWindow(QMainWindow):
 
     def __init__(self):
@@ -108,7 +109,6 @@ class MainWindow(QMainWindow):
         menu_layout.addWidget(QLabel("Nb. of frames: " + str(1)))
 
         self.upper_layout.addLayout(menu_layout)
-        
 
     def _create_leds_grid_btn(self):
 
@@ -135,6 +135,3 @@ class MainWindow(QMainWindow):
 
     def _update_frame_player(self):
         pass
-
-
-    

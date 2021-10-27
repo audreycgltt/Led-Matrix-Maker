@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import QDialog
 from PyQt5.QtWidgets import QVBoxLayout
 from PyQt5.QtWidgets import QTextEdit
 
+
 class DisplayWindow(QDialog):
 
     def __init__(self):

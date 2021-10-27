@@ -15,16 +15,17 @@ class LedMatrixMakerView(QMainWindow):
 
         self.main_window.show()
 
+
 class LedMatrixMakerCtrl:
 
     def __init__(self, model, view):
         """Controller initializer."""
         self._app = model
         self._view = view
-        # Connect signals and slots
-        self._connectSignals()
 
-    def _connectSignals(self):
+        self._connect_signals()
+
+    def _connect_signals(self):
         """Connect signals and slots."""
         for btn in self._view.main_window.grid_btn:
             btn.clicked.connect(partial(self.grid_btn_clicked, btn))
@@ -56,7 +57,7 @@ class LedMatrixMakerCtrl:
             btn.setStyleSheet("background-color: {};".format("grey"))
             new_state = 0
             
-        self._app.set_current_matrix_data(row,column,new_state)
+        self._app.set_current_matrix_data(row, column, new_state)
 
     def _move_up(self):
         self._app.move_matrix_up()

@@ -24,7 +24,6 @@ def main():
     led_maker = QApplication(sys.argv)
 
     view = LedMatrixMakerView()
-
     model = LedMatrixMakerApp()
 
     LedMatrixMakerCtrl(model=model, view=view)

@@ -69,7 +69,7 @@ class LedMatrixMakerApp:
     @staticmethod
     def convert(data):
         res = []
-        for anim in data :
+        for anim in data:
             res.append("[")
             for raw_byte in anim:
                 bin_str_byte = "".join(map(str, raw_byte))
