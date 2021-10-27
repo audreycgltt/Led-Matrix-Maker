@@ -37,6 +37,7 @@ class LedMatrixMakerCtrl:
         self._view.main_window.control_btn["next_frame"].clicked.connect(self._next_frame)
 
         self._view.main_window.control_btn["add_frame"].clicked.connect(self._add_frame)
+        self._view.main_window.control_btn["duplicate_frame"].clicked.connect(self._duplicate_frame)
         self._view.main_window.control_btn["remove_frame"].clicked.connect(self._remove_frame)
 
         self._view.main_window.control_btn["up_button"].clicked.connect(self._move_up)  
@@ -76,14 +77,28 @@ class LedMatrixMakerCtrl:
         self._update_leds_grid()
 
     def _update_frame_player(self):
-        pass
+
+        nb_current = self._app.get_current_data_pos()
+        total_frames = self._app.get_nb_frames()
+
+        prev_btn = True if nb_current > 0 else False
+        next_btn = True if nb_current < total_frames - 1 else False
+
+        self._view.main_window.update_frame_player(prev_btn, next_btn)
+        self._view.main_window.set_frames_nb(current=nb_current, total=total_frames)
 
     def _add_frame(self):
         self._app.append_new_frame()
         self._update_leds_grid()
+        #self._view.main_window.set_frame_nb()
+
+    def _duplicate_frame(self):
+        self._app.append_new_frame(duplicate=True)
+        self._update_leds_grid()
 
     def _remove_frame(self):
-        pass
+        self._app.remove_current_frame()
+        self._update_leds_grid()
 
     def _previous_frame(self):
         self._app.move_to_previous()
@@ -96,7 +111,9 @@ class LedMatrixMakerCtrl:
         self._update_leds_grid()
 
     def _update_leds_grid(self):
+        self._update_frame_player()
         displayed_matrix_data = self._app.get_current_matrix_data()
+
         for led in self._view.main_window.grid_btn:
             idx = self._view.main_window.led_layout.indexOf(led)
             row, column, cols, rows = self._view.main_window.led_layout.getItemPosition(idx)

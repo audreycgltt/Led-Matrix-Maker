@@ -22,6 +22,7 @@ class MainWindow(QMainWindow):
 
         self.current_frame_nb = 1
         self.nb_frames = 1
+        self.frame_label = QLabel(f"Frame: {self.current_frame_nb}/{self.nb_frames}")
 
         self.grid_btn = []
         self.control_btn = {}
@@ -95,8 +96,10 @@ class MainWindow(QMainWindow):
 
         frames_control_layout = QVBoxLayout()
         self.control_btn["add_frame"] = QPushButton("Add New")
-        self.control_btn["remove_frame"] = QPushButton("Remove Last")
+        self.control_btn["duplicate_frame"] = QPushButton("Duplicate")
+        self.control_btn["remove_frame"] = QPushButton("Remove Current")
         frames_control_layout.addWidget(self.control_btn["add_frame"])
+        frames_control_layout.addWidget(self.control_btn["duplicate_frame"])
         frames_control_layout.addWidget(self.control_btn["remove_frame"])
 
         frames_control.addLayout(frames_control_layout)
@@ -106,7 +109,7 @@ class MainWindow(QMainWindow):
         menu_layout.addWidget(move_box)
         menu_layout.addWidget(frames_box)
         menu_layout.addStretch()
-        menu_layout.addWidget(QLabel("Nb. of frames: " + str(1)))
+        menu_layout.addWidget(self.frame_label)
 
         self.upper_layout.addLayout(menu_layout)
 
@@ -133,5 +136,13 @@ class MainWindow(QMainWindow):
 
         self.upper_layout.addLayout(self.led_layout)
 
-    def _update_frame_player(self):
-        pass
+    def update_frame_player(self, previous_btn_state=False, next_btn_state=False):
+        self.control_btn["previous_frame"].setEnabled(previous_btn_state)
+        self.control_btn["next_frame"].setEnabled(next_btn_state)
+
+    def set_frames_nb(self, current, total):
+        self.current_frame_nb = current
+        self.nb_frames = total
+
+        self.frame_label.setText(f"Frame: {self.current_frame_nb + 1}/{self.nb_frames}")
+

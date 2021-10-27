@@ -11,7 +11,8 @@ class LedMatrixMakerApp:
     def _init_frames_list(self):
         self.frames_list.append(self._init_matrix_data())
 
-    def _init_matrix_data(self):
+    @staticmethod
+    def _init_matrix_data():
         matrix_data = [0] * 8
         for i in range(8):
             matrix_data[i] = [0] * 8
@@ -36,9 +37,16 @@ class LedMatrixMakerApp:
             line.pop(0)
             line.append(0)
 
-    def append_new_frame(self):
-        self.frames_list.append(self._init_matrix_data())
+    def append_new_frame(self, duplicate=False):
+        if not duplicate:
+            self.frames_list.append(self._init_matrix_data())
+        else:
+            self.frames_list.append(self.frames_list[self.current_matrix_pos])
         self.current_matrix_pos += 1
+
+    def remove_current_frame(self):
+        self.frames_list.pop(self.current_matrix_pos)
+        self.current_matrix_pos -= 1
 
     def get_current_data_pos(self):
         return self.current_matrix_pos
