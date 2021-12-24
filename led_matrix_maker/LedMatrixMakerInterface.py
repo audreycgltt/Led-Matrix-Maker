@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import QMainWindow
 
 from led_matrix_maker.UI.MainWindow import MainWindow
 from led_matrix_maker.UI.DisplayWindow import DisplayWindow
+from led_matrix_maker.UI.SettingsWindow import SettingsWindow
 
 
 class LedMatrixMakerView(QMainWindow):
@@ -12,6 +13,7 @@ class LedMatrixMakerView(QMainWindow):
         super().__init__()
         self.main_window = MainWindow()
         self.display_window = DisplayWindow()
+        self.settings_window = SettingsWindow()
 
         self.main_window.show()
 
@@ -83,14 +85,14 @@ class LedMatrixMakerCtrl:
 
         prev_btn = True if nb_current > 0 else False
         next_btn = True if nb_current < total_frames - 1 else False
+        rm_btn = True if total_frames > 1 else False
 
-        self._view.main_window.update_frame_player(prev_btn, next_btn)
+        self._view.main_window.update_frame_player(prev_btn, next_btn, rm_btn)
         self._view.main_window.set_frames_nb(current=nb_current, total=total_frames)
 
     def _add_frame(self):
         self._app.append_new_frame()
         self._update_leds_grid()
-        #self._view.main_window.set_frame_nb()
 
     def _duplicate_frame(self):
         self._app.append_new_frame(duplicate=True)
@@ -129,3 +131,5 @@ class LedMatrixMakerCtrl:
         self._view.display_window.get_text(result_display)
         self._view.display_window.exec_()
 
+    def _open_settings_window(self):
+        self._view.settings_window.exec_()

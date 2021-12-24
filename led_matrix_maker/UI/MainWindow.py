@@ -56,10 +56,10 @@ class MainWindow(QMainWindow):
         bottom_button_layout.addWidget(self.control_btn["Generate"])
         bottom_button_layout.addWidget(self.control_btn["Exit"])
 
-        #self.bottom_layout.addStretch()
         self.bottom_layout.addLayout(bottom_button_layout)   
 
     def _create_right_menu_display(self):
+
 
         move_box = QGroupBox("Movements")
 
@@ -98,6 +98,7 @@ class MainWindow(QMainWindow):
         self.control_btn["add_frame"] = QPushButton("Add New")
         self.control_btn["duplicate_frame"] = QPushButton("Duplicate")
         self.control_btn["remove_frame"] = QPushButton("Remove Current")
+        self.control_btn["remove_frame"].setEnabled(False)
         frames_control_layout.addWidget(self.control_btn["add_frame"])
         frames_control_layout.addWidget(self.control_btn["duplicate_frame"])
         frames_control_layout.addWidget(self.control_btn["remove_frame"])
@@ -105,7 +106,7 @@ class MainWindow(QMainWindow):
         frames_control.addLayout(frames_control_layout)
         frames_box.setLayout(frames_control)
 
-        menu_layout = QVBoxLayout()      
+        menu_layout = QVBoxLayout()
         menu_layout.addWidget(move_box)
         menu_layout.addWidget(frames_box)
         menu_layout.addStretch()
@@ -136,9 +137,10 @@ class MainWindow(QMainWindow):
 
         self.upper_layout.addLayout(self.led_layout)
 
-    def update_frame_player(self, previous_btn_state=False, next_btn_state=False):
+    def update_frame_player(self, previous_btn_state=False, next_btn_state=False, remove_btn_state=False):
         self.control_btn["previous_frame"].setEnabled(previous_btn_state)
         self.control_btn["next_frame"].setEnabled(next_btn_state)
+        self.control_btn["remove_frame"].setEnabled(remove_btn_state)
 
     def set_frames_nb(self, current, total):
         self.current_frame_nb = current

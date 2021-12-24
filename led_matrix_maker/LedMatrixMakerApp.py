@@ -1,3 +1,5 @@
+import copy
+
 class LedMatrixMakerApp:
 
     def __init__(self):
@@ -41,7 +43,7 @@ class LedMatrixMakerApp:
         if not duplicate:
             self.frames_list.append(self._init_matrix_data())
         else:
-            self.frames_list.append(self.frames_list[self.current_matrix_pos])
+            self.frames_list.append(copy.deepcopy(self.frames_list[self.current_matrix_pos]))
         self.current_matrix_pos += 1
 
     def remove_current_frame(self):

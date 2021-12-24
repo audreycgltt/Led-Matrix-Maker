@@ -3,17 +3,7 @@ import sys
 from led_matrix_maker.LedMatrixMakerInterface import LedMatrixMakerCtrl, LedMatrixMakerView
 from led_matrix_maker.LedMatrixMakerApp import LedMatrixMakerApp
 
-from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication
-
-from PyQt5.QtWidgets import QGridLayout
-from PyQt5.QtWidgets import QGroupBox
-from PyQt5.QtWidgets import QHBoxLayout
-from PyQt5.QtWidgets import QLabel
-from PyQt5.QtWidgets import QLineEdit
-from PyQt5.QtWidgets import QPushButton
-from PyQt5.QtWidgets import QRadioButton
-from PyQt5.QtWidgets import QTextEdit
 
 
 __version__ = "0.1"
